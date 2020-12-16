@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="label_text">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:layout_marginHorizontal">4dp</item>
+    </style>
+
+    <style name="small_label_text" parent="label_text">
+        <item name="android:textSize">14dp</item>
+    </style>
+
 </resources>
