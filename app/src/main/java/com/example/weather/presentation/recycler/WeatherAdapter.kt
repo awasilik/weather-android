@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.weather_recycler_item.view.*
 
 class WeatherAdapter() : RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
@@ -20,7 +21,7 @@ class WeatherAdapter() : RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
         fun bind(data : Pair<Int, Uri>)
         {
             view.temperatureItemText.text = data.first.toString()
-            view.weatherItemImage.setImageURI(data.second)
+            Picasso.with(view.context).load(data.second).into(view.weatherItemImage)
         }
     }
 
