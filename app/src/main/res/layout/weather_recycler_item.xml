@@ -1,41 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="4dp">
+    android:paddingHorizontal="8dp"
+    android:paddingVertical="4dp">
+
+    <TextView
+        android:id="@+id/weatherItemTime"
+        style="@style/label_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:text="16:00"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/weatherItemImage"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/weather_background" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weatherItemTime" />
 
     <TextView
         android:id="@+id/temperatureItemText"
         style="@style/label_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="12"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/temperatureItemUnit"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weatherItemImage"
-        app:layout_constraintHorizontal_chainStyle="packed"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/temperatureItemUnit" />
 
     <TextView
         android:id="@+id/temperatureItemUnit"
         style="@style/small_label_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="°C"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/temperatureItemText"
-        app:layout_constraintTop_toTopOf="@id/temperatureItemText"
-        app:layout_constraintHorizontal_chainStyle="packed"/>
+        app:layout_constraintTop_toTopOf="@id/temperatureItemText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
