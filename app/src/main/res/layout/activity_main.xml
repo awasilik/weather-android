@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
+
+    <Spinner
+        android:id="@+id/citySpinner"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/refreshButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/refreshButton"
@@ -17,30 +28,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/citySpinner" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/forecast_recycler"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Spinner
-        android:id="@+id/citySpinner"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="16dp"
-        android:background="@null"
-        app:layout_constraintEnd_toStartOf="@+id/refreshButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <View
         android:id="@+id/weather_background"
         android:layout_width="0dp"
@@ -50,30 +37,24 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/weather_background"
-        app:layout_constraintBottom_toTopOf="@+id/forecast_recycler"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/citySpinner"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toTopOf="@+id/forecast_recycler" />
 
     <ImageView
         android:id="@+id/weatherImage"
         android:layout_width="156dp"
         android:layout_height="156dp"
-        android:layout_marginTop="48dp"
-        android:src="@drawable/weather_background"
-        app:layout_constraintEnd_toEndOf="@+id/weather_background"
-        app:layout_constraintHorizontal_bias="0.497"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@+id/weather_background"
+        app:layout_constraintEnd_toEndOf="@+id/weather_background"
         app:layout_constraintTop_toTopOf="@+id/weather_background" />
 
     <TextView
         android:id="@+id/temperatureValueText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="14"
         android:textColor="@color/primary_text_color"
         android:textSize="56dp"
         app:layout_constraintEnd_toStartOf="@+id/temperatureUnitText"
@@ -97,7 +78,7 @@
         android:id="@+id/windImage"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/ic_wind"
         app:layout_constraintBottom_toTopOf="@+id/windText"
         app:layout_constraintEnd_toEndOf="@+id/windText"
@@ -127,7 +108,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="10m/s"
         app:layout_constraintBottom_toBottomOf="@+id/weather_background"
         app:layout_constraintEnd_toStartOf="@+id/pressureText"
         app:layout_constraintStart_toStartOf="@+id/weather_background" />
@@ -137,7 +117,6 @@
         android:id="@+id/pressureText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="1050hPA"
         app:layout_constraintBottom_toBottomOf="@+id/windText"
         app:layout_constraintEnd_toStartOf="@id/humidityText"
         app:layout_constraintStart_toEndOf="@id/windText" />
@@ -147,9 +126,21 @@
         android:id="@+id/humidityText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="48%"
         app:layout_constraintBottom_toBottomOf="@+id/windText"
         app:layout_constraintEnd_toEndOf="@+id/weather_background"
         app:layout_constraintStart_toEndOf="@+id/pressureText" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/forecast_recycler"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
