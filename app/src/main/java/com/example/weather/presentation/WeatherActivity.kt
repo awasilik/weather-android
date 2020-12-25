@@ -8,20 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.R
 import com.example.weather.domain.Location
-import com.example.weather.domain.MainViewModel
-import com.example.weather.presentation.recycler.WeatherAdapter
+import com.example.weather.domain.WeatherViewModel
+import com.example.weather.presentation.recycler.ForecastAdapter
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.weather_recycler_item.view.*
+import kotlinx.android.synthetic.main.weather_activity.*
 import kotlin.math.roundToInt
 
-class MainActivity : AppCompatActivity() {
+class WeatherActivity : AppCompatActivity() {
 
-    private val viewModel = MainViewModel()
+    private val viewModel = WeatherViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.weather_activity)
 
         initView()
     }
@@ -30,21 +29,21 @@ class MainActivity : AppCompatActivity() {
     {
         viewModel.refreshData()
 
-        citySpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, viewModel.locationList)
-        citySpinner.onItemSelectedListener = this.SpinnerItemSelectedListener()
+        weather_swipe_refresh.setOnRefreshListener { viewModel.refreshData() }
 
-        refreshButton.setOnClickListener { viewModel.refreshData() }
+        weather_spn_city.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, viewModel.locationList)
+        weather_spn_city.onItemSelectedListener = this.SpinnerItemSelectedListener()
 
-        forecast_recycler.adapter = WeatherAdapter(viewModel.forecast)
-        forecast_recycler.layoutManager =
+        weather_recycler_forecast.adapter = ForecastAdapter(viewModel.forecast)
+        weather_recycler_forecast.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        Picasso.get().load(viewModel.currentWeather?.imageUrl).into(weatherImage)
+        Picasso.get().load(viewModel.currentWeather?.imageUrl).into(weather_img_weather_icon)
 
-        temperatureValueText.text = viewModel.currentWeather?.temperature?.roundToInt().toString()
-        windText.text = viewModel.currentWeather?.windSpeed?.toWindString()
-        pressureText.text = viewModel.currentWeather?.pressure?.toPressureString()
-        humidityText.text = viewModel.currentWeather?.humidity?.toHumidityString()
+        weather_tv_temperature.text = viewModel.currentWeather?.temperature?.roundToInt().toString()
+        weather_tv_wind.text = viewModel.currentWeather?.windSpeed?.toWindString()
+        weather_tv_pressure.text = viewModel.currentWeather?.pressure?.toPressureString()
+        weather_tv_humidity.text = viewModel.currentWeather?.humidity?.toHumidityString()
     }
 
     private fun Double.toWindString() = "$this m/s"

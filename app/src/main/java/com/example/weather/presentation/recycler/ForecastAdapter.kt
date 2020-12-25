@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
 import com.example.weather.domain.model.WeatherData
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.weather_recycler_item.view.*
+import kotlinx.android.synthetic.main.forecast_item.view.*
 
-class WeatherAdapter(private val weatherDataList: List<WeatherData>) : RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
+class ForecastAdapter(private val weatherDataList: List<WeatherData>) :
+    RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.weather_recycler_item, parent, false)
+            .inflate(R.layout.forecast_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -25,13 +26,10 @@ class WeatherAdapter(private val weatherDataList: List<WeatherData>) : RecyclerV
 
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(data : WeatherData)
-        {
-            view.weatherItemTime.text = "${data.time.hour}:00"
-            view.temperatureItemText.text = data.temperature.toString()
-            Picasso.get().load(data.imageUrl).into(view.weatherItemImage)
+        fun bind(data: WeatherData) {
+            view.forecast_tv_time.text = "${data.time.hour}:00"
+            view.forecast_tv_temperature.text = data.temperature.toString()
+            Picasso.get().load(data.imageUrl).into(view.forecast_img_weather_icon)
         }
-
-
     }
 }
