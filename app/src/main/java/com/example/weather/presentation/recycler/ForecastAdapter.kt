@@ -24,8 +24,7 @@ class ForecastAdapter(private val weatherDataList: List<WeatherData>) :
 
     override fun getItemCount() = weatherDataList.size
 
-
-    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(data: WeatherData) {
             view.forecast_tv_time.text = "${data.time.hour}:00"
             view.forecast_tv_temperature.text = data.temperature.toString()

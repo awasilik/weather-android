@@ -23,10 +23,10 @@ class WeatherRepository(
         get<ForecastResponse>(RequestType.Forecast(forecastSpan), location)
 
     private inline fun <reified T> get(requestType: RequestType, location: Location): T {
-
         val request = requestFactory.create(requestType, location)
         val response = httpClient.newCall(request).execute()
 
+        // return status code and message
         return gson.fromJson(response.body?.string(), T::class.java)
     }
 }

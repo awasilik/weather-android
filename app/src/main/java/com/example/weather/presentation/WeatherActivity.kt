@@ -12,7 +12,6 @@ import com.example.weather.domain.WeatherViewModel
 import com.example.weather.presentation.recycler.ForecastAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.weather_activity.*
-import kotlin.math.roundToInt
 
 class WeatherActivity : AppCompatActivity() {
 
@@ -40,7 +39,7 @@ class WeatherActivity : AppCompatActivity() {
 
         Picasso.get().load(viewModel.currentWeather?.imageUrl).into(weather_img_weather_icon)
 
-        weather_tv_temperature.text = viewModel.currentWeather?.temperature?.roundToInt().toString()
+        weather_tv_temperature.text = viewModel.currentWeather?.temperature?.toString()
         weather_tv_wind.text = viewModel.currentWeather?.windSpeed?.toWindString()
         weather_tv_pressure.text = viewModel.currentWeather?.pressure?.toPressureString()
         weather_tv_humidity.text = viewModel.currentWeather?.humidity?.toHumidityString()
