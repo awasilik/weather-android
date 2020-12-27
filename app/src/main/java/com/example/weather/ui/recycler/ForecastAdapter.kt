@@ -1,4 +1,4 @@
-package com.example.weather.presentation.recycler
+package com.example.weather.ui.recycler
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,7 @@ import com.example.weather.domain.model.WeatherData
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.forecast_item.view.*
 
-class ForecastAdapter(private val weatherDataList: List<WeatherData>) :
+class ForecastAdapter(private var forecastDataList: List<WeatherData>) :
     RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,10 +19,16 @@ class ForecastAdapter(private val weatherDataList: List<WeatherData>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(weatherDataList[position])
+        holder.bind(forecastDataList[position])
     }
 
-    override fun getItemCount() = weatherDataList.size
+    override fun getItemCount() = forecastDataList.size
+
+    fun updateForecast(newForecastDataList: List<WeatherData>)
+    {
+        forecastDataList =  newForecastDataList;
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(data: WeatherData) {

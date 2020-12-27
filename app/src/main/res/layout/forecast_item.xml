@@ -4,8 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="8dp"
-    android:paddingVertical="4dp">
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp"
+    android:background="@drawable/background_group">
 
     <TextView
         android:id="@+id/forecast_tv_time"
@@ -34,18 +35,19 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/forecast_img_weather_icon"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/forecast_tv_temperature_unit" />
+        app:layout_constraintEnd_toStartOf="@id/forecast_tv_temperature_unit"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
 
     <TextView
         android:id="@+id/forecast_tv_temperature_unit"
         style="@style/small_label_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        android:text="@string/temperature_unit"
         app:layout_constraintStart_toEndOf="@id/forecast_tv_temperature"
-        app:layout_constraintTop_toTopOf="@id/forecast_tv_temperature" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/forecast_tv_temperature"
+        app:layout_constraintHorizontal_chainStyle="packed" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

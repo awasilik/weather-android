@@ -25,8 +25,8 @@ class WeatherDataProcessor(
             parseTime(response.time!!),
             response.weatherValues?.temperature!!.roundToInt(),
             response.wind?.speed!!,
-            response.weatherValues?.pressure!!,
-            response.weatherValues?.humidity!!,
+            response.weatherValues.pressure!!,
+            response.weatherValues.humidity!!,
             parseUrl(response.description?.get(0)?.icon!!)
         )
 
