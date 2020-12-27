@@ -1,14 +1,13 @@
 package com.example.weather.repository
 
-import com.example.weather.domain.Location
-import com.example.weather.repository.model.ForecastResponse
-import com.example.weather.repository.model.WeatherResponse
+import com.example.weather.domain.model.Location
+import com.example.weather.repository.model.Forecast
+import com.example.weather.repository.model.Weather
 import com.example.weather.repository.request.RequestFactory
 import com.example.weather.repository.request.RequestType
+import com.example.weather.repository.response.ApiResponse
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
-import kotlin.coroutines.CoroutineContext
-
 
 class WeatherRepository(
     private val httpClient: OkHttpClient = OkHttpClient(),
@@ -17,16 +16,16 @@ class WeatherRepository(
 ) {
 
     fun getWeather(location: Location) =
-        get<WeatherResponse>(RequestType.Weather(), location)
+        get<Weather>(RequestType.Weather(), location)
 
     fun getForecast(location: Location, forecastSpan: Int) =
-        get<ForecastResponse>(RequestType.Forecast(forecastSpan), location)
+        get<Forecast>(RequestType.Forecast(forecastSpan), location)
 
-    private inline fun <reified T> get(requestType: RequestType, location: Location): T {
+    private inline fun <reified T> get(requestType: RequestType, location: Location): ApiResponse<T> {
         val request = requestFactory.create(requestType, location)
         val response = httpClient.newCall(request).execute()
+        val data = gson.fromJson(response.body?.string(), T::class.java)
 
-        // return status code and message
-        return gson.fromJson(response.body?.string(), T::class.java)
+        return ApiResponse(response.code, response.message, data)
     }
 }

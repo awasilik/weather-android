@@ -5,6 +5,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.R
 import com.example.weather.databinding.WeatherActivityBinding
-import com.example.weather.domain.Location
+import com.example.weather.domain.model.Location
 import com.example.weather.ui.recycler.ForecastAdapter
 import com.example.weather.viewmodel.WeatherViewModel
 import com.squareup.picasso.Picasso
@@ -52,6 +53,11 @@ class WeatherActivity : AppCompatActivity() {
             vm.weather.observe(binding.lifecycleOwner!!, {
                 Picasso.get().load(it.imageUrl).into(weather_img_weather_icon)
             })
+
+            vm.errorMessage.observe(binding.lifecycleOwner!!, {
+                if (it!=null)
+                    showProblemsDialog(it)
+            })
         }
     }
 
@@ -73,6 +79,19 @@ class WeatherActivity : AppCompatActivity() {
         weather_recycler_forecast.adapter = forecastAdapter
         weather_recycler_forecast.layoutManager = layoutManager
         weather_recycler_forecast.addItemDecoration(itemDecoration)
+    }
+
+    private fun showProblemsDialog(errorMessage: String)
+    {
+        AlertDialog.Builder(this)
+            .setTitle("Something went wrong")
+            .setMessage("Could not retrieve data, reason: $errorMessage")
+            .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
+            .setPositiveButton("Retry") { dialog,_ ->
+                binding.viewmodel?.refreshData()
+                dialog.dismiss()
+            }
+            .show()
     }
 
     inner class SpinnerItemSelectedListener : AdapterView.OnItemSelectedListener {

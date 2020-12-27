@@ -1,4 +1,4 @@
-package com.example.weather.domain
+package com.example.weather.domain.model
 
 enum class Location(val city: String) {
     WARSAW("Warsaw"),
@@ -9,4 +9,5 @@ enum class Location(val city: String) {
     MADRID("Madryt"),
     PARIS("Paryż"),
     PRAGUE("Praga"),
+    MOERS("Moers")
 }

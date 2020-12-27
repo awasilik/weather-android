@@ -2,7 +2,7 @@ package com.example.weather.repository.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ForecastResponse(
+data class Forecast(
     @field:SerializedName("list")
-    val weatherValues: List<WeatherResponse?>? = null
+    val weatherValues: List<Weather?>? = null
 )

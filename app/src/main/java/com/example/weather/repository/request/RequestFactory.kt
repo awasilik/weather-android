@@ -1,6 +1,6 @@
 package com.example.weather.repository.request
 
-import com.example.weather.domain.Location
+import com.example.weather.domain.model.Location
 import okhttp3.HttpUrl
 import okhttp3.Request
 
