@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:padding="8dp"
+    android:id="@+id/widget_root">
+
+    <RelativeLayout
+        android:id="@+id/widget_lyt_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/widget_tv_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/accented_text_color"
+            android:textSize="40dp"/>
+
+        <TextView
+            android:id="@+id/widget_tv_temperature_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_toEndOf="@+id/widget_tv_temperature"
+            android:layout_alignTop="@+id/widget_tv_temperature"
+            android:textColor="@color/primary_text_color"
+            android:textSize="24dp"
+            android:text="@string/temperature_unit"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/widget_tv_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/widget_lyt_temperature"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/accented_text_color"
+        android:textSize="16dp"/>
+
+
+</RelativeLayout>

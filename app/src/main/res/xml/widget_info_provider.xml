@@ -1,0 +1,13 @@
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="120dp"
+    android:minHeight="40dp"
+    android:updatePeriodMillis="900000"
+    android:previewImage="@drawable/ic_wind"
+    android:initialLayout="@layout/app_widget"
+    android:resizeMode="horizontal"
+    android:widgetCategory="home_screen">
+</appwidget-provider>
+<!--
+to configure widget use this to point to proper activity
+android:configure="com.example.android.ExampleAppWidgetConfigure"
+-->
