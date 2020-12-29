@@ -7,6 +7,9 @@
 
     <string name="temperature_unit">°C</string>
 
+    <string name="fragment_forecast">Prognoza</string>
+    <string name="fragment_weather">Pogoda</string>
+
     <string name="city_warsaw">Warszawa</string>
     <string name="city_cracow">Kraków</string>
     <string name="city_tarnobrzeg">Tarnobrzeg</string>
