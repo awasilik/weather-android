@@ -1,4 +1,4 @@
-package com.example.weather.domain
+package com.example.weather.domain.dataProcessors
 
 import com.example.weather.domain.model.*
 import com.example.weather.repository.WeatherRepository
@@ -6,6 +6,8 @@ import com.example.weather.repository.model.Current
 import com.example.weather.repository.model.Daily
 import com.example.weather.repository.model.Hourly
 import com.example.weather.repository.model.WeatherApiData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.time.Instant
 import java.time.ZoneId
 import kotlin.math.roundToInt
@@ -15,8 +17,8 @@ class WeatherDataProcessor(
 ) {
     private val successStatusRange = 200..300
 
-    fun fetchData(location: Location): ResultWrapper<WeatherData> {
-        val apiResponse = weatherRepository.getWeatherData(location)
+    suspend fun fetchData(location: Location): ResultWrapper<WeatherData> {
+        val apiResponse = withContext(Dispatchers.Default) { weatherRepository.getWeatherData(location) }
 
         return if (successStatusRange.contains(apiResponse.statusCode))
             ResultWrapper.Success(getWeatherData(apiResponse.data))

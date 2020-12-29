@@ -22,7 +22,7 @@ class AppWidget : AppWidgetProvider() {
         val viewModel = AppWidgetViewModel()
 
         appWidgetIds?.forEach { widgetId ->
-            val pendingIntent = Intent(context, WeatherActivity::class.java)
+            val pendingIntent = Intent(context, HostActivity::class.java)
                 .let { PendingIntent.getActivity(context, 0, it, 0)}
 
             CoroutineScope(Dispatchers.Main).launch {

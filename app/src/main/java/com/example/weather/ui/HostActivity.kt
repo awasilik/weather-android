@@ -4,28 +4,23 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.R
-import com.example.weather.databinding.WeatherActivityBinding
+import com.example.weather.databinding.HostActivityBinding
 import com.example.weather.domain.model.Location
-import com.example.weather.domain.model.getName
-import com.example.weather.ui.adapters.ForecastAdapter
+import com.example.weather.ui.adapters.HostPagerAdapter
 import com.example.weather.ui.adapters.LocationAdapter
-import com.example.weather.viewmodel.WeatherViewModel
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.weather_activity.*
+import com.example.weather.viewmodel.HostViewModel
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.host_activity.*
+import java.util.*
 
+class HostActivity : AppCompatActivity() {
 
-class WeatherActivity : AppCompatActivity() {
-
-    private lateinit var binding: WeatherActivityBinding
-    private lateinit var forecastAdapter: ForecastAdapter
+    private lateinit var binding: HostActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,47 +32,42 @@ class WeatherActivity : AppCompatActivity() {
 
         setupBinding()
         setupObservers()
-        setupView()
+        setupSpinner()
+        setupViewPager()
     }
 
     private fun setupBinding() {
-        binding = DataBindingUtil.setContentView(this, R.layout.weather_activity)
-        binding.viewmodel = ViewModelProvider(this).get(WeatherViewModel::class.java)
+        binding = DataBindingUtil.setContentView(this, R.layout.host_activity)
+        binding.viewmodel = ViewModelProvider(this).get(HostViewModel::class.java)
         binding.lifecycleOwner = this
     }
 
-    private fun setupObservers() {
-
-        binding.viewmodel?.let { vm ->
-            vm.hourlyForecast.observe(binding.lifecycleOwner!!, {
-                forecastAdapter.updateForecast(it)
-            })
-
-            vm.weather.observe(binding.lifecycleOwner!!, {
-                Picasso.get().load(it.imageUrl).into(weather_img_weather_icon)
-            })
-
-            vm.errorMessage.observe(binding.lifecycleOwner!!, {
-                if (it!=null)
-                    showProblemsDialog(it)
-            })
-        }
+    private fun setupObservers()
+    {
+        binding.viewmodel?.errorMessage?.observe(binding.lifecycleOwner!!, {
+            if (it!=null)
+                showProblemsDialog(it)
+        })
     }
 
-    private fun setupView() {
+    private fun setupSpinner(){
         val spinnerAdapter = LocationAdapter(this, binding.viewmodel?.locationList!!)
 
         weather_spn_city.adapter = spinnerAdapter
         weather_spn_city.setSelection(spinnerAdapter.getPosition(binding.viewmodel?.currentLocation?.value))
         weather_spn_city.onItemSelectedListener = this.SpinnerItemSelectedListener()
+    }
 
-        forecastAdapter = ForecastAdapter(emptyList())
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
+    private fun setupViewPager(){
+        val pagerAdapter = HostPagerAdapter(this)
+        pagerAdapter.addFragment(getString(R.string.fragment_weather), WeatherFragment())
+        pagerAdapter.addFragment(getString(R.string.fragment_forecast), ForecastFragment())
 
-        weather_recycler_forecast.adapter = forecastAdapter
-        weather_recycler_forecast.layoutManager = layoutManager
-        weather_recycler_forecast.addItemDecoration(itemDecoration)
+        host_view_pager.adapter = pagerAdapter
+
+        TabLayoutMediator(host_tab_layout, host_view_pager){ tab, position ->
+            tab.text = pagerAdapter.getFragmentName(position)
+        }.attach()
     }
 
     private fun showProblemsDialog(errorMessage: String)

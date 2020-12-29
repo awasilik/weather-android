@@ -1,4 +1,4 @@
-package com.example.weather.domain
+package com.example.weather.domain.dataProcessors
 
 sealed class ResultWrapper<T> {
     class Success<T>(val data: T): ResultWrapper<T>()

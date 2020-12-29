@@ -1,6 +1,6 @@
 package com.example.weather.viewmodel
 
-import com.example.weather.domain.WeatherDataProcessor
+import com.example.weather.domain.dataProcessors.WeatherDataProcessor
 import com.example.weather.domain.model.Location
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
