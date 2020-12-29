@@ -1,15 +1,15 @@
-package com.example.weather.ui.recycler
+package com.example.weather.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
-import com.example.weather.domain.model.WeatherData
+import com.example.weather.domain.model.HourlyWeather
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.forecast_item.view.*
 
-class ForecastAdapter(private var forecastDataList: List<WeatherData>) :
+class ForecastAdapter(private var forecastDataList: List<HourlyWeather>) :
     RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,14 +24,14 @@ class ForecastAdapter(private var forecastDataList: List<WeatherData>) :
 
     override fun getItemCount() = forecastDataList.size
 
-    fun updateForecast(newForecastDataList: List<WeatherData>)
+    fun updateForecast(newForecastDataList: List<HourlyWeather>)
     {
         forecastDataList =  newForecastDataList;
         notifyDataSetChanged()
     }
 
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(data: WeatherData) {
+        fun bind(data: HourlyWeather) {
             view.forecast_tv_time.text = "${data.time.hour}:00"
             view.forecast_tv_temperature.text = data.temperature.toString()
             Picasso.get().load(data.imageUrl).into(view.forecast_img_weather_icon)

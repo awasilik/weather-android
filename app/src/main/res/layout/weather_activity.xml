@@ -19,7 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="64dp"
+            android:paddingTop="36dp"
             android:paddingBottom="36dp"
             android:paddingHorizontal="16dp">
 
@@ -37,9 +37,9 @@
                 android:id="@+id/weather_img_weather_background"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginVertical="24dp"
+                android:layout_marginVertical="16dp"
                 android:background="@drawable/background_group"
-                app:layout_constraintBottom_toTopOf="@+id/weather_recycler_forecast"
+                app:layout_constraintBottom_toTopOf="@+id/weather_tv_forecast_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/weather_spn_city" />
@@ -152,6 +152,15 @@
                 app:layout_constraintEnd_toEndOf="@+id/weather_img_weather_background"
                 app:layout_constraintStart_toEndOf="@+id/weather_tv_pressure" />
 
+            <TextView
+                android:id="@+id/weather_tv_forecast_label"
+                style="@style/label_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Hourly forecast:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/weather_recycler_forecast"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/weather_recycler_forecast"

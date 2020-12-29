@@ -30,7 +30,7 @@ class AppWidget : AppWidgetProvider() {
 
                 val views = RemoteViews(context?.packageName, R.layout.app_widget)
                 views.setTextViewText(R.id.widget_tv_temperature, temperature.toString())
-                views.setTextViewText(R.id.widget_tv_city, viewModel.location.name)
+                views.setTextViewText(R.id.widget_tv_city, context?.getString(viewModel.location.labelId))
                 views.setOnClickPendingIntent(R.id.widget_root, pendingIntent)
 
                 appWidgetManager?.updateAppWidget(widgetId, views)

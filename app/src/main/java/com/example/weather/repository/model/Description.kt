@@ -2,8 +2,7 @@ package com.example.weather.repository.model
 
 import com.google.gson.annotations.SerializedName
 
-data class DescriptionValues(
-
+data class Description(
     @field:SerializedName("main")
     val name: String? = null,
 

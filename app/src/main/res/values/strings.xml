@@ -6,4 +6,14 @@
     <string name="humidity">%1$d %%</string>
 
     <string name="temperature_unit">°C</string>
+
+    <string name="city_warsaw">Warszawa</string>
+    <string name="city_cracow">Kraków</string>
+    <string name="city_tarnobrzeg">Tarnobrzeg</string>
+    <string name="city_london">Londyn</string>
+    <string name="city_berlin">Berlin</string>
+    <string name="city_madrid">Madryt</string>
+    <string name="city_paris">Paryż</string>
+    <string name="city_prague">Praga</string>
+    <string name="city_moers">Moers</string>
 </resources>

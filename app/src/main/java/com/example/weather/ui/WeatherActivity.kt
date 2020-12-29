@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.R
 import com.example.weather.databinding.WeatherActivityBinding
 import com.example.weather.domain.model.Location
-import com.example.weather.ui.recycler.ForecastAdapter
+import com.example.weather.domain.model.getName
+import com.example.weather.ui.adapters.ForecastAdapter
+import com.example.weather.ui.adapters.LocationAdapter
 import com.example.weather.viewmodel.WeatherViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.weather_activity.*
@@ -45,8 +47,9 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
+
         binding.viewmodel?.let { vm ->
-            vm.forecast.observe(binding.lifecycleOwner!!, {
+            vm.hourlyForecast.observe(binding.lifecycleOwner!!, {
                 forecastAdapter.updateForecast(it)
             })
 
@@ -62,12 +65,8 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        val spinnerAdapter = ArrayAdapter(
-            this,
-            R.layout.location_spinner_item,
-            binding.viewmodel?.locationList!!
-        )
-        spinnerAdapter.setDropDownViewResource(R.layout.location_spinner_dropdown_item)
+        val spinnerAdapter = LocationAdapter(this, binding.viewmodel?.locationList!!)
+
         weather_spn_city.adapter = spinnerAdapter
         weather_spn_city.setSelection(spinnerAdapter.getPosition(binding.viewmodel?.currentLocation?.value))
         weather_spn_city.onItemSelectedListener = this.SpinnerItemSelectedListener()

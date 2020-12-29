@@ -3,8 +3,7 @@ package com.example.weather.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weather.domain.model.Location
-import com.example.weather.domain.model.WeatherData
+import com.example.weather.domain.model.*
 import com.example.weather.domain.WeatherDataProcessor
 import kotlinx.coroutines.*
 import java.time.LocalTime
@@ -14,7 +13,7 @@ class WeatherViewModel(
     private val weatherDataProcessor: WeatherDataProcessor = WeatherDataProcessor()
 ) : ViewModel() {
 
-    private val defaultLocation = Location.TARNOBRZEG
+    private val defaultLocation = Location.Tarnobrzeg
 
     val retrievingData = MutableLiveData<Boolean>()
 
@@ -22,9 +21,9 @@ class WeatherViewModel(
 
     val currentLocation = MutableLiveData<Location>().apply { value = defaultLocation }
 
-    val weather = MutableLiveData<WeatherData>()
+    val weather = MutableLiveData<CurrentWeather>()
 
-    val forecast = MutableLiveData<List<WeatherData>>()
+    val hourlyForecast = MutableLiveData<List<HourlyWeather>>()
 
     val currentTimeString = MutableLiveData<String>()
 
@@ -35,8 +34,10 @@ class WeatherViewModel(
             retrievingData.value = true
 
             try {
-                weather.value = getWeather().value
-                forecast.value = getForecast().value
+                val weatherData = fetchData()
+
+                weather.value = weatherData.currentWeather
+                hourlyForecast.value = weatherData.hourlyWeather.fromNow()
                 errorMessage.value = null
             }
             catch (e : Throwable)
@@ -49,16 +50,15 @@ class WeatherViewModel(
         }
     }
 
-    private suspend fun getWeather() = withContext(Dispatchers.Default) {
-        weatherDataProcessor.getCurrentWeather(currentLocation.value!!)
-    }
-
-    private suspend fun getForecast() = withContext(Dispatchers.Default) {
-        weatherDataProcessor.getForecast(currentLocation.value!!, 10)
+    private suspend fun fetchData() = withContext(Dispatchers.Default) {
+        weatherDataProcessor.fetchData(currentLocation.value!!).value
     }
 
     private fun getTimeString() : String {
         val formatter = DateTimeFormatter.ofPattern("HH:mm")
         return LocalTime.now().format(formatter)
     }
+
+    private fun List<HourlyWeather>.fromNow() =
+        this.filter { weather -> weather.time > LocalTime.now() }
 }
