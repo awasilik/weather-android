@@ -1,3 +1,5 @@
 package com.example.weather.repository.response
 
-data class ApiResponse<T>(val statusCode: Int, val statusMessage: String, val data: T)
+import com.example.weather.repository.model.WeatherApiData
+
+data class ApiResponse(val statusCode: Int, val statusMessage: String, val data: WeatherApiData)
