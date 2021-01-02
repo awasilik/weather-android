@@ -8,6 +8,7 @@ import com.example.weather.domain.WeatherDataHolder
 import com.example.weather.domain.model.*
 import com.example.weather.domain.dataProcessors.WeatherDataProcessor
 import kotlinx.coroutines.*
+import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
@@ -16,7 +17,11 @@ class WeatherViewModel(
 ) : ViewModel() {
 
     private val currentWeatherObserver = Observer<CurrentWeather> { weather.value = it }
-    private val hourlyForecastObserver = Observer<List<HourlyWeather>> { hourlyForecast.value = it.fromNow() }
+    private val hourlyForecastObserver = Observer<List<HourlyWeather>> { hourlyForecast.value = it.today() }
+
+    val weather = MutableLiveData<CurrentWeather>()
+
+    val hourlyForecast = MutableLiveData<List<HourlyWeather>>()
 
     init {
         setupObservers()
@@ -26,10 +31,6 @@ class WeatherViewModel(
         super.onCleared()
         removeObservers()
     }
-
-    val weather = MutableLiveData<CurrentWeather>()
-
-    val hourlyForecast = MutableLiveData<List<HourlyWeather>>()
 
     private fun setupObservers() {
         weatherDataHolder.currentWeather.observeForever(currentWeatherObserver)
@@ -41,6 +42,6 @@ class WeatherViewModel(
         weatherDataHolder.hourlyForecast.removeObserver(hourlyForecastObserver)
     }
 
-    private fun List<HourlyWeather>.fromNow() =
-        this.filter { weather -> weather.time > LocalTime.now() }
+    private fun List<HourlyWeather>.today() =
+        this.filter { weather -> weather.time.dayOfMonth == LocalDateTime.now().dayOfMonth }
 }

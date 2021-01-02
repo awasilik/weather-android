@@ -10,6 +10,8 @@
     <string name="fragment_forecast">Prognoza</string>
     <string name="fragment_weather">Pogoda</string>
 
+    <string name="hourly_forecast_label">Prognoza godzinowa:</string>
+
     <string name="city_warsaw">Warszawa</string>
     <string name="city_cracow">Kraków</string>
     <string name="city_tarnobrzeg">Tarnobrzeg</string>

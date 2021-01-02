@@ -85,5 +85,5 @@ class WeatherDataProcessor(
         "https://openweathermap.org/img/wn/${imageId}@2x.png"
 
     private fun parseTime(timeStamp: Long?) =
-        Instant.ofEpochSecond(timeStamp!!).atZone(ZoneId.systemDefault()).toLocalTime()
+        Instant.ofEpochSecond(timeStamp!!).atZone(ZoneId.systemDefault()).toLocalDateTime()
 }

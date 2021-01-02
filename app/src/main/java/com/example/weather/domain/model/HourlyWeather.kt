@@ -1,9 +1,9 @@
 package com.example.weather.domain.model
 
-import java.time.LocalTime
+import java.time.LocalDateTime
 
 data class HourlyWeather(
-    val time: LocalTime,
+    val time: LocalDateTime,
     val temperature: Int,
     val feelsLike: Int,
     val windSpeed: Double,
