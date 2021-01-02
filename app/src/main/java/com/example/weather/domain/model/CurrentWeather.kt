@@ -1,11 +1,11 @@
 package com.example.weather.domain.model
 
-import java.time.LocalTime
+import java.time.LocalDateTime
 
 data class CurrentWeather(
-    val time: LocalTime,
-    val sunrise: LocalTime,
-    val sunset: LocalTime,
+    val time: LocalDateTime,
+    val sunrise: LocalDateTime,
+    val sunset: LocalDateTime,
     val temperature: Int,
     val feelsLike: Int,
     val windSpeed: Double,

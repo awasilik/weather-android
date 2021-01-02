@@ -42,41 +42,40 @@ class HostActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
     }
 
-    private fun setupObservers()
-    {
+    private fun setupObservers() {
         binding.viewmodel?.errorMessage?.observe(binding.lifecycleOwner!!, {
-            if (it!=null)
+            if (it != null)
                 showProblemsDialog(it)
         })
     }
 
-    private fun setupSpinner(){
+    private fun setupSpinner() {
         val spinnerAdapter = LocationAdapter(this, binding.viewmodel?.locationList!!)
 
-        weather_spn_city.adapter = spinnerAdapter
-        weather_spn_city.setSelection(spinnerAdapter.getPosition(binding.viewmodel?.currentLocation?.value))
-        weather_spn_city.onItemSelectedListener = this.SpinnerItemSelectedListener()
+        host_spn_city.adapter = spinnerAdapter
+        host_spn_city.setSelection(spinnerAdapter.getPosition(binding.viewmodel?.currentLocation?.value))
+        host_spn_city.onItemSelectedListener = this.SpinnerItemSelectedListener()
     }
 
-    private fun setupViewPager(){
+    private fun setupViewPager() {
         val pagerAdapter = HostPagerAdapter(this)
         pagerAdapter.addFragment(getString(R.string.fragment_weather), WeatherFragment())
         pagerAdapter.addFragment(getString(R.string.fragment_forecast), ForecastFragment())
 
+        host_view_pager.isUserInputEnabled = false
         host_view_pager.adapter = pagerAdapter
 
-        TabLayoutMediator(host_tab_layout, host_view_pager){ tab, position ->
+        TabLayoutMediator(host_tab_layout, host_view_pager) { tab, position ->
             tab.text = pagerAdapter.getFragmentName(position)
         }.attach()
     }
 
-    private fun showProblemsDialog(errorMessage: String)
-    {
+    private fun showProblemsDialog(errorMessage: String) {
         AlertDialog.Builder(this)
             .setTitle("Something went wrong")
             .setMessage("Could not retrieve data, reason: $errorMessage")
             .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
-            .setPositiveButton("Retry") { dialog,_ ->
+            .setPositiveButton("Retry") { dialog, _ ->
                 binding.viewmodel?.refreshData()
                 dialog.dismiss()
             }

@@ -9,7 +9,7 @@
     android:background="@drawable/background_group">
 
     <TextView
-        android:id="@+id/hour_forecast_tv_time"
+        android:id="@+id/hourly_tv_time"
         style="@style/label_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -21,33 +21,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/hour_forecast_img_weather_icon"
+        android:id="@+id/hourly_img_weather_icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hour_forecast_tv_time" />
+        app:layout_constraintTop_toBottomOf="@+id/hourly_tv_time" />
 
     <TextView
-        android:id="@+id/hour_forecast_tv_temperature"
+        android:id="@+id/hourly_tv_temperature"
         style="@style/label_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/hour_forecast_img_weather_icon"
+        app:layout_constraintTop_toBottomOf="@+id/hourly_img_weather_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/hour_forecast_tv_temperature_unit"
+        app:layout_constraintEnd_toStartOf="@id/hourly_tv_temperature_unit"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
     <TextView
-        android:id="@+id/hour_forecast_tv_temperature_unit"
+        android:id="@+id/hourly_tv_temperature_unit"
         style="@style/small_label_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/temperature_unit"
-        app:layout_constraintStart_toEndOf="@id/hour_forecast_tv_temperature"
+        app:layout_constraintStart_toEndOf="@id/hourly_tv_temperature"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/hour_forecast_tv_temperature"
+        app:layout_constraintTop_toTopOf="@id/hourly_tv_temperature"
         app:layout_constraintHorizontal_chainStyle="packed" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

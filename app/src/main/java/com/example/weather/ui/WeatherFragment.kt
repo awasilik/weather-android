@@ -8,9 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.weather.R
 import com.example.weather.databinding.WeatherFragmentBinding
-import com.example.weather.ui.adapters.ForecastAdapter
+import com.example.weather.ui.adapters.HourlyForecastAdapter
 import com.example.weather.viewmodel.WeatherViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.weather_fragment.*
@@ -19,7 +18,7 @@ import java.time.format.DateTimeFormatter
 class WeatherFragment : Fragment() {
 
     private lateinit var binding: WeatherFragmentBinding
-    private lateinit var forecastAdapter: ForecastAdapter
+    private val hourlyForecastAdapter = HourlyForecastAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +44,7 @@ class WeatherFragment : Fragment() {
     private fun setupObservers() {
         binding.viewmodel?.let { vm ->
             vm.hourlyForecast.observe(binding.lifecycleOwner!!, {
-                forecastAdapter.updateForecast(it)
+                hourlyForecastAdapter.updateForecast(it)
             })
 
             vm.weather.observe(binding.lifecycleOwner!!, {
@@ -56,11 +55,10 @@ class WeatherFragment : Fragment() {
     }
 
     private fun setupView() {
-        forecastAdapter = ForecastAdapter(emptyList())
         val layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         val itemDecoration = DividerItemDecoration(this.context, layoutManager.orientation)
 
-        weather_recycler_forecast.adapter = forecastAdapter
+        weather_recycler_forecast.adapter = hourlyForecastAdapter
         weather_recycler_forecast.layoutManager = layoutManager
         weather_recycler_forecast.addItemDecoration(itemDecoration)
     }

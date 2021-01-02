@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewmodel"
             type="com.example.weather.viewmodel.WeatherViewModel" />
@@ -19,46 +20,46 @@
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/background_group"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/weather_tv_forecast_label"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/weather_tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="56dp"
             android:textColor="@color/primary_text_color"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="56dp"
+            app:layout_constraintBottom_toTopOf="@+id/weather_img_weather_icon"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/weather_img_weather_background"
-            app:layout_constraintBottom_toTopOf="@+id/weather_img_weather_icon"/>
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <ImageView
             android:id="@+id/weather_img_weather_icon"
             android:layout_width="192dp"
             android:layout_height="192dp"
-            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@+id/weather_tv_temperature"
             app:layout_constraintEnd_toEndOf="@+id/weather_img_weather_background"
             app:layout_constraintStart_toStartOf="@+id/weather_img_weather_background"
             app:layout_constraintTop_toBottomOf="@+id/weather_tv_time"
-            app:layout_constraintBottom_toTopOf="@+id/weather_tv_temperature"/>
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/weather_tv_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewmodel.weather.temperature)}"
             android:textColor="@color/primary_text_color"
             android:textSize="56dp"
-            android:text="@{String.valueOf(viewmodel.weather.temperature)}"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@+id/weather_img_wind"
             app:layout_constraintEnd_toStartOf="@+id/weather_tv_temperature_unit"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@+id/weather_img_weather_background"
             app:layout_constraintTop_toBottomOf="@+id/weather_img_weather_icon"
-            app:layout_constraintBottom_toTopOf="@+id/weather_img_wind"/>
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/weather_tv_temperature_unit"
@@ -137,9 +138,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Hourly forecast:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/weather_recycler_forecast"/>
+            android:text="@string/hourly_forecast_label"
+            app:layout_constraintBottom_toTopOf="@+id/weather_recycler_forecast"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/weather_recycler_forecast"
