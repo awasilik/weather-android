@@ -1,7 +1,6 @@
 package com.example.weather.domain
 
 import androidx.lifecycle.MutableLiveData
-import com.example.weather.domain.dataProcessors.ResultWrapper
 import com.example.weather.domain.dataProcessors.WeatherDataProcessor
 import com.example.weather.domain.model.*
 import com.example.weather.repository.WeatherRepository

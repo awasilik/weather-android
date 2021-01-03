@@ -6,16 +6,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weather.domain.WeatherDataHolder
 import com.example.weather.domain.model.Location
+import com.example.weather.util.LocationStorage
 import kotlinx.coroutines.launch
 
 class HostViewModel @ViewModelInject constructor(
-    private val dataHolder: WeatherDataHolder): ViewModel() {
-
-    private val defaultLocation = Location.Tarnobrzeg
+    private val dataHolder: WeatherDataHolder,
+    private val locationStorage: LocationStorage): ViewModel() {
 
     val locationList = Location.values()
 
-    val currentLocation = MutableLiveData<Location>().apply { value = defaultLocation }
+    var currentLocation  = locationStorage.retrieve()
+        set(value){
+            field = value
+            locationStorage.save(value)
+            refreshData()
+        }
 
     val retrievingData = MutableLiveData<Boolean>()
 
@@ -24,7 +29,7 @@ class HostViewModel @ViewModelInject constructor(
     fun refreshData() {
         viewModelScope.launch {
             retrievingData.value = true
-            dataHolder.refreshData(currentLocation.value!!) { errorMessage.value = it }
+            dataHolder.refreshData(currentLocation) { errorMessage.value = it }
             errorMessage.value = null
             retrievingData.value = false
         }

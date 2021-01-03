@@ -57,7 +57,7 @@ class HostActivity : AppCompatActivity() {
         val spinnerAdapter = LocationAdapter(this, binding.viewmodel?.locationList!!)
 
         host_spn_city.adapter = spinnerAdapter
-        host_spn_city.setSelection(spinnerAdapter.getPosition(binding.viewmodel?.currentLocation?.value))
+        host_spn_city.setSelection(spinnerAdapter.getPosition(binding.viewmodel?.currentLocation))
         host_spn_city.onItemSelectedListener = this.SpinnerItemSelectedListener()
     }
 
@@ -88,9 +88,7 @@ class HostActivity : AppCompatActivity() {
 
     inner class SpinnerItemSelectedListener : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            binding.viewmodel?.currentLocation?.value =
-                parent?.getItemAtPosition(position) as Location
-            binding.viewmodel?.refreshData()
+            binding.viewmodel?.currentLocation = parent?.getItemAtPosition(position) as Location
         }
 
         override fun onNothingSelected(parent: AdapterView<*>?) {
