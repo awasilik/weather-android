@@ -5,18 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.databinding.ForecastFragmentBinding
 import com.example.weather.ui.adapters.DailyForecastAdapter
 import com.example.weather.viewmodel.ForecastViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.forecast_fragment.*
-import kotlinx.android.synthetic.main.weather_fragment.*
 
+@AndroidEntryPoint
 class ForecastFragment : Fragment(){
 
     private lateinit var binding: ForecastFragmentBinding
+    private val viewModel: ForecastViewModel by viewModels()
     private val dailyForecastAdapter = DailyForecastAdapter()
 
     override fun onCreateView(
@@ -26,7 +27,7 @@ class ForecastFragment : Fragment(){
     ): View? {
 
         binding = ForecastFragmentBinding.inflate(inflater, container, false).apply {
-            viewmodel = ViewModelProvider(this@ForecastFragment).get(ForecastViewModel::class.java)
+            viewmodel = viewModel
             lifecycleOwner = viewLifecycleOwner
         }
 

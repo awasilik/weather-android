@@ -11,6 +11,6 @@ class AppWidgetViewModel(private val dataProcessor: WeatherDataProcessor = Weath
         get() = Location.Tarnobrzeg
 
     suspend fun getTemperature() = withContext(Dispatchers.Default) {
-        dataProcessor.fetchData(Location.Tarnobrzeg).value.currentWeather.temperature
+        //dataProcessor.fetchData(Location.Tarnobrzeg).value.currentWeather.temperature
     }
 }

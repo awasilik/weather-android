@@ -1,19 +1,16 @@
 package com.example.weather.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.weather.domain.WeatherDataHolder
-import com.example.weather.domain.model.*
-import com.example.weather.domain.dataProcessors.WeatherDataProcessor
-import kotlinx.coroutines.*
+import com.example.weather.domain.model.CurrentWeather
+import com.example.weather.domain.model.HourlyWeather
 import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 
-class WeatherViewModel(
-    private val weatherDataHolder: WeatherDataHolder = WeatherDataHolder.instance
+class WeatherViewModel @ViewModelInject constructor(
+    private val weatherDataHolder: WeatherDataHolder
 ) : ViewModel() {
 
     private val currentWeatherObserver = Observer<CurrentWeather> { weather.value = it }

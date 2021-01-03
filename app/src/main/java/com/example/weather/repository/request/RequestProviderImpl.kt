@@ -3,14 +3,15 @@ package com.example.weather.repository.request
 import com.example.weather.domain.model.Location
 import okhttp3.HttpUrl
 import okhttp3.Request
+import javax.inject.Inject
 
-class RequestCreator {
+class RequestProviderImpl @Inject constructor(): RequestProvider {
     private val scheme = "https"
     private val host = "api.openweathermap.org"
     private val apiKeyParamValue = "e68070b14288ef240ba8b785ada3bf40"
     private val unitsValue = "metric"
 
-    fun withLocation(location : Location) =
+    override fun getRequest(location : Location) =
         Request.Builder()
             .url(createUrl(location))
             .build()

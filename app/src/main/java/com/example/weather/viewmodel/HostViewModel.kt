@@ -1,5 +1,6 @@
 package com.example.weather.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,7 +8,8 @@ import com.example.weather.domain.WeatherDataHolder
 import com.example.weather.domain.model.Location
 import kotlinx.coroutines.launch
 
-class HostViewModel(private val dataHolder: WeatherDataHolder = WeatherDataHolder.instance) : ViewModel() {
+class HostViewModel @ViewModelInject constructor(
+    private val dataHolder: WeatherDataHolder): ViewModel() {
 
     private val defaultLocation = Location.Tarnobrzeg
 

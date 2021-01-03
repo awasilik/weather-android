@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -15,12 +16,15 @@ import com.example.weather.ui.adapters.HostPagerAdapter
 import com.example.weather.ui.adapters.LocationAdapter
 import com.example.weather.viewmodel.HostViewModel
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.host_activity.*
 import java.util.*
 
+@AndroidEntryPoint
 class HostActivity : AppCompatActivity() {
 
     private lateinit var binding: HostActivityBinding
+    val viewModel: HostViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +42,7 @@ class HostActivity : AppCompatActivity() {
 
     private fun setupBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.host_activity)
-        binding.viewmodel = ViewModelProvider(this).get(HostViewModel::class.java)
+        binding.viewmodel = viewModel
         binding.lifecycleOwner = this
     }
 

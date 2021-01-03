@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,12 +13,15 @@ import com.example.weather.databinding.WeatherFragmentBinding
 import com.example.weather.ui.adapters.HourlyForecastAdapter
 import com.example.weather.viewmodel.WeatherViewModel
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.weather_fragment.*
 import java.time.format.DateTimeFormatter
 
+@AndroidEntryPoint
 class WeatherFragment : Fragment() {
 
     private lateinit var binding: WeatherFragmentBinding
+    private val viewModel: WeatherViewModel by viewModels()
     private val hourlyForecastAdapter = HourlyForecastAdapter()
 
     override fun onCreateView(
@@ -27,7 +31,7 @@ class WeatherFragment : Fragment() {
     ): View? {
 
         binding = WeatherFragmentBinding.inflate(inflater, container, false).apply {
-            viewmodel = ViewModelProvider(this@WeatherFragment).get(WeatherViewModel::class.java)
+            viewmodel = viewModel
             lifecycleOwner = viewLifecycleOwner
         }
 

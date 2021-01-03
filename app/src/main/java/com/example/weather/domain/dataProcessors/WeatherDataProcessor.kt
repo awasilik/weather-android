@@ -1,37 +1,25 @@
 package com.example.weather.domain.dataProcessors
 
-import com.example.weather.domain.model.*
-import com.example.weather.repository.WeatherRepository
+import com.example.weather.domain.model.CurrentWeather
+import com.example.weather.domain.model.DailyWeather
+import com.example.weather.domain.model.HourlyWeather
+import com.example.weather.domain.model.WeatherData
 import com.example.weather.repository.model.Current
 import com.example.weather.repository.model.Daily
 import com.example.weather.repository.model.Hourly
 import com.example.weather.repository.model.WeatherApiData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.time.Instant
 import java.time.ZoneId
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
-class WeatherDataProcessor(
-    private val weatherRepository: WeatherRepository = WeatherRepository()
-) {
-    private val successStatusRange = 200..300
+class WeatherDataProcessor @Inject constructor() {
 
-    suspend fun fetchData(location: Location): ResultWrapper<WeatherData> {
-        val apiResponse = withContext(Dispatchers.Default) { weatherRepository.getWeatherData(location) }
-
-        return if (successStatusRange.contains(apiResponse.statusCode))
-            ResultWrapper.Success(getWeatherData(apiResponse.data))
-        else
-            ResultWrapper.Failure(Throwable(apiResponse.statusMessage))
-    }
-
-    private fun getWeatherData(apiData: WeatherApiData) =
-        WeatherData(
-            getCurrentWeatherData(apiData.current!!),
-            apiData.hourly!!.map { getHourlyWeatherData(it) },
-            apiData.daily!!.map { getDailyWeatherData(it) }
-        )
+    fun process(data: WeatherApiData) = WeatherData(
+        getCurrentWeatherData(data.current!!),
+        data.hourly!!.map { getHourlyWeatherData(it) },
+        data.daily!!.map { getDailyWeatherData(it) }
+    )
 
     private fun getCurrentWeatherData(apiData: Current) =
         CurrentWeather(
