@@ -18,9 +18,9 @@ class WeatherDataHolder @Inject constructor(
 
     val currentWeather = MutableLiveData<CurrentWeather>()
 
-    val hourlyForecast = MutableLiveData<List<HourlyWeather>>()
+    val hourlyForecast = MutableLiveData<List<HourlyForecast>>()
 
-    val dailyForecast = MutableLiveData<List<DailyWeather>>()
+    val dailyForecast = MutableLiveData<List<DailyForecast>>()
 
     suspend fun refreshData(location: Location, errorHandler: (String?) -> Unit) = withContext(Dispatchers.Main) {
         try {

@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.weather.domain.WeatherDataHolder
-import com.example.weather.domain.model.DailyWeather
+import com.example.weather.domain.model.DailyForecast
 
 class ForecastViewModel @ViewModelInject constructor(
     private val weatherDataHolder: WeatherDataHolder) : ViewModel() {
 
-    private val dailyForecastObserver = Observer<List<DailyWeather>> { forecast.value = it }
+    private val dailyForecastObserver = Observer<List<DailyForecast>> { forecast.value = it }
 
-    val forecast = MutableLiveData<List<DailyWeather>>()
+    val forecast = MutableLiveData<List<DailyForecast>>()
 
     init {
         setupObservers()

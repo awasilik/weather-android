@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.weather.domain.WeatherDataHolder
 import com.example.weather.domain.model.CurrentWeather
-import com.example.weather.domain.model.HourlyWeather
+import com.example.weather.domain.model.HourlyForecast
 import java.time.LocalDateTime
 
 class WeatherViewModel @ViewModelInject constructor(
@@ -14,11 +14,11 @@ class WeatherViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val currentWeatherObserver = Observer<CurrentWeather> { weather.value = it }
-    private val hourlyForecastObserver = Observer<List<HourlyWeather>> { hourlyForecast.value = it.today() }
+    private val hourlyForecastObserver = Observer<List<HourlyForecast>> { hourlyForecast.value = it.today() }
 
     val weather = MutableLiveData<CurrentWeather>()
 
-    val hourlyForecast = MutableLiveData<List<HourlyWeather>>()
+    val hourlyForecast = MutableLiveData<List<HourlyForecast>>()
 
     init {
         setupObservers()
@@ -39,6 +39,6 @@ class WeatherViewModel @ViewModelInject constructor(
         weatherDataHolder.hourlyForecast.removeObserver(hourlyForecastObserver)
     }
 
-    private fun List<HourlyWeather>.today() =
+    private fun List<HourlyForecast>.today() =
         this.filter { weather -> weather.time.dayOfMonth == LocalDateTime.now().dayOfMonth }
 }
