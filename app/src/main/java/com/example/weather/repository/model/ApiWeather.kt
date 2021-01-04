@@ -2,15 +2,15 @@ package com.example.weather.repository.model
 
 import com.google.gson.annotations.SerializedName
 
-data class WeatherApiData(
+data class ApiWeather(
     @field:SerializedName("current")
-    val current: Current? = null,
+    val current: ApiCurrentWeather? = null,
 
     @field:SerializedName("hourly")
-    val hourly: List<Hourly>? = null,
+    val hourly: List<ApiHourlyForecast>? = null,
 
     @field:SerializedName("daily")
-    val daily: List<Daily>? = null
+    val daily: List<ApiDaily>? = null
 )
 
 

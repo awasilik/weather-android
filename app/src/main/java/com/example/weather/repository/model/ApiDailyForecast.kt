@@ -2,7 +2,7 @@ package com.example.weather.repository.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Daily(
+data class ApiDaily(
     @field:SerializedName("dt")
     val time: Long? = null,
 

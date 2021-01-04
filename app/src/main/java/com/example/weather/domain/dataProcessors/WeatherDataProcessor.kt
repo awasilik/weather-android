@@ -1,32 +1,26 @@
 package com.example.weather.domain.dataProcessors
 
-import com.example.weather.domain.model.CurrentWeather
-import com.example.weather.domain.model.DailyWeather
-import com.example.weather.domain.model.HourlyWeather
-import com.example.weather.domain.model.WeatherData
-import com.example.weather.repository.model.Current
-import com.example.weather.repository.model.Daily
-import com.example.weather.repository.model.Hourly
-import com.example.weather.repository.model.WeatherApiData
-import java.time.Instant
-import java.time.ZoneId
+import com.example.weather.domain.model.Weather
+import com.example.weather.repository.model.ApiCurrentWeather
+import com.example.weather.repository.model.ApiDaily
+import com.example.weather.repository.model.ApiHourlyForecast
+import com.example.weather.repository.model.ApiWeather
 import javax.inject.Inject
-import kotlin.math.roundToInt
 
-class WeatherDataProcessor @Inject constructor() : DataProcessor<WeatherApiData, WeatherData>() {
+class WeatherDataProcessor @Inject constructor() : DataProcessor<ApiWeather, Weather>() {
 
-    override fun process(data: WeatherApiData) = WeatherData(
+    override fun process(data: ApiWeather) = Weather(
         getCurrentWeatherData(data.current!!),
         data.hourly!!.map { getHourlyWeatherData(it) },
         data.daily!!.map { getDailyWeatherData(it) }
     )
 
-    private fun getCurrentWeatherData(apiData: Current) =
+    private fun getCurrentWeatherData(apiData: ApiCurrentWeather) =
         CurrentWeatherDataProcessor().process(apiData)
 
-    private fun getHourlyWeatherData(apiData: Hourly) =
+    private fun getHourlyWeatherData(apiData: ApiHourlyForecast) =
         HourlyForecastDataProcessor().process(apiData)
 
-    private fun getDailyWeatherData(apiData: Daily) =
+    private fun getDailyWeatherData(apiData: ApiDaily) =
         DailyForecastDataProcessor().process(apiData)
 }

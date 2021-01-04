@@ -1,10 +1,10 @@
 package com.example.weather.domain.dataProcessors
 
-import com.example.weather.domain.model.DailyWeather
-import com.example.weather.repository.model.Daily
+import com.example.weather.domain.model.DailyForecast
+import com.example.weather.repository.model.ApiDaily
 
-class DailyForecastDataProcessor: DataProcessor<Daily, DailyWeather>() {
-    override fun process(apiData: Daily) = DailyWeather(
+class DailyForecastDataProcessor: DataProcessor<ApiDaily, DailyForecast>() {
+    override fun process(apiData: ApiDaily) = DailyForecast(
         parseTime(apiData.time),
         parseTemperature(apiData.forecastTemperature?.day),
         parseTemperature(apiData.forecastTemperature?.night),

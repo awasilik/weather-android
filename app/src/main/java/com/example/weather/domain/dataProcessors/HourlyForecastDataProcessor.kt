@@ -1,11 +1,11 @@
 package com.example.weather.domain.dataProcessors
 
-import com.example.weather.domain.model.HourlyWeather
-import com.example.weather.repository.model.Hourly
+import com.example.weather.domain.model.HourlyForecast
+import com.example.weather.repository.model.ApiHourlyForecast
 
-class HourlyForecastDataProcessor : DataProcessor<Hourly, HourlyWeather>() {
-    override fun process(apiData: Hourly) =
-        HourlyWeather(
+class HourlyForecastDataProcessor : DataProcessor<ApiHourlyForecast, HourlyForecast>() {
+    override fun process(apiData: ApiHourlyForecast) =
+        HourlyForecast(
             parseTime(apiData.time),
             parseTemperature(apiData.temperature),
             parseTemperature(apiData.temperature),
