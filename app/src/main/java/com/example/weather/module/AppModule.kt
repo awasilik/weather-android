@@ -1,13 +1,12 @@
 package com.example.weather.module
 
-import com.example.weather.repository.WeatherRepository
-import com.example.weather.repository.WeatherRepositoryImpl
-import com.example.weather.repository.request.RequestProvider
-import com.example.weather.repository.request.RequestProviderImpl
+import com.example.weather.api.WeatherRepository
+import com.example.weather.api.WeatherRepositoryImpl
+import com.example.weather.api.request.RequestProvider
+import com.example.weather.api.request.RequestProviderImpl
 import com.example.weather.util.LocationStorage
 import com.example.weather.util.LocationStorageImpl
 import com.google.gson.Gson
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

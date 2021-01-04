@@ -1,7 +1,7 @@
 package com.example.weather.domain.dataProcessors
 
 import com.example.weather.domain.model.CurrentWeather
-import com.example.weather.repository.model.ApiCurrentWeather
+import com.example.weather.api.model.ApiCurrentWeather
 
 class CurrentWeatherDataProcessor : DataProcessor<ApiCurrentWeather, CurrentWeather>() {
     override fun process(apiData: ApiCurrentWeather) = CurrentWeather(

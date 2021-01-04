@@ -3,7 +3,7 @@ package com.example.weather.domain
 import androidx.lifecycle.MutableLiveData
 import com.example.weather.domain.dataProcessors.WeatherDataProcessor
 import com.example.weather.domain.model.*
-import com.example.weather.repository.WeatherRepository
+import com.example.weather.api.WeatherRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

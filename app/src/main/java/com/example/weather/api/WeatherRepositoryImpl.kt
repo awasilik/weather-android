@@ -1,9 +1,9 @@
-package com.example.weather.repository
+package com.example.weather.api
 
 import com.example.weather.domain.model.Location
-import com.example.weather.repository.model.ApiWeather
-import com.example.weather.repository.request.RequestProvider
-import com.example.weather.repository.response.ApiResponse
+import com.example.weather.api.model.ApiWeather
+import com.example.weather.api.request.RequestProvider
+import com.example.weather.api.response.ApiResponse
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import javax.inject.Inject
