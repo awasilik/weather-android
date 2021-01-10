@@ -12,9 +12,19 @@ import java.time.format.TextStyle
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DailyForecastAdapter : RecyclerView.Adapter<DailyForecastAdapter.ViewHolder>() {
+interface DailyForecastClickListener{
+    fun itemSelected(forecast: DailyForecast)
+}
+
+class DailyForecastAdapter(private val clickListener: DailyForecastClickListener)
+    : RecyclerView.Adapter<DailyForecastAdapter.ViewHolder>() {
 
     private var forecastDataList: List<DailyForecast> = ArrayList()
+    private var selectedIndex = 0
+        set(value){
+            field = value
+            updateSelectedItem()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -24,6 +34,7 @@ class DailyForecastAdapter : RecyclerView.Adapter<DailyForecastAdapter.ViewHolde
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(forecastDataList[position])
+        holder.itemView.setOnClickListener { selectedIndex = position }
     }
 
     override fun getItemCount() = forecastDataList.size
@@ -31,6 +42,11 @@ class DailyForecastAdapter : RecyclerView.Adapter<DailyForecastAdapter.ViewHolde
     fun updateForecast(newForecastDataList: List<DailyForecast>) {
         forecastDataList = newForecastDataList;
         notifyDataSetChanged()
+        updateSelectedItem()
+    }
+
+    private fun updateSelectedItem(){
+        clickListener.itemSelected(forecastDataList[selectedIndex])
     }
 
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {

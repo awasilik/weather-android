@@ -22,17 +22,18 @@ class WeatherDataHolder @Inject constructor(
 
     val dailyForecast = MutableLiveData<List<DailyForecast>>()
 
-    suspend fun refreshData(location: Location, errorHandler: (String?) -> Unit) = withContext(Dispatchers.Main) {
-        try {
-            val weatherData = fetchData(location).value
+    suspend fun refreshData(location: Location, errorHandler: (String?) -> Unit) =
+        withContext(Dispatchers.Main) {
+            try {
+                val weatherData = fetchData(location).value
 
-            currentWeather.value = weatherData.currentWeather
-            hourlyForecast.value = weatherData.hourlyWeather
-            dailyForecast.value = weatherData.dailyWeather
-        } catch (e: Throwable) {
-            errorHandler.invoke(e.message)
+                currentWeather.value = weatherData.currentWeather
+                hourlyForecast.value = weatherData.hourlyWeather
+                dailyForecast.value = weatherData.dailyWeather
+            } catch (e: Throwable) {
+                errorHandler.invoke(e.message)
+            }
         }
-    }
 
     private suspend fun fetchData(location: Location) = withContext(Dispatchers.Default) {
         val apiResponse = weatherRepository.getData(location)

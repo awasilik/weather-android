@@ -10,7 +10,7 @@ import com.example.weather.domain.model.DailyForecast
 class ForecastViewModel @ViewModelInject constructor(
     private val weatherDataHolder: WeatherDataHolder) : ViewModel() {
 
-    private val dailyForecastObserver = Observer<List<DailyForecast>> { forecast.value = it }
+    private val dailyForecastObserver = Observer<List<DailyForecast>> { forecast.value = it.drop(1) }
 
     val forecast = MutableLiveData<List<DailyForecast>>()
 

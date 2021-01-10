@@ -9,10 +9,10 @@ import javax.inject.Inject
 
 class WeatherDataProcessor @Inject constructor() : DataProcessor<ApiWeather, Weather>() {
 
-    override fun process(data: ApiWeather) = Weather(
-        getCurrentWeatherData(data.current!!),
-        data.hourly!!.map { getHourlyWeatherData(it) },
-        data.daily!!.map { getDailyWeatherData(it) }
+    override fun process(apiData: ApiWeather) = Weather(
+        getCurrentWeatherData(apiData.current!!),
+        apiData.hourly!!.map { getHourlyWeatherData(it) },
+        apiData.daily!!.map { getDailyWeatherData(it) }
     )
 
     private fun getCurrentWeatherData(apiData: ApiCurrentWeather) =
