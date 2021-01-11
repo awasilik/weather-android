@@ -1,10 +1,10 @@
 package com.example.weather.domain.dataProcessors
 
 import com.example.weather.domain.model.Weather
-import com.example.weather.api.model.ApiCurrentWeather
-import com.example.weather.api.model.ApiDaily
-import com.example.weather.api.model.ApiHourlyForecast
-import com.example.weather.api.model.ApiWeather
+import com.example.weather.repository.api.model.ApiCurrentWeather
+import com.example.weather.repository.api.model.ApiDaily
+import com.example.weather.repository.api.model.ApiHourlyForecast
+import com.example.weather.repository.api.model.ApiWeather
 import javax.inject.Inject
 
 class WeatherDataProcessor @Inject constructor() : DataProcessor<ApiWeather, Weather>() {

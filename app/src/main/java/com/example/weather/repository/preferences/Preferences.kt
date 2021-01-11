@@ -1,4 +1,4 @@
-package com.example.weather.util
+package com.example.weather.repository.preferences
 
 import android.content.Context
 import android.content.SharedPreferences

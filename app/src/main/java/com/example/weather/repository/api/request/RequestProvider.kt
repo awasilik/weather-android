@@ -1,4 +1,4 @@
-package com.example.weather.api.request
+package com.example.weather.repository.api.request
 
 import com.example.weather.domain.model.Location
 import okhttp3.Request

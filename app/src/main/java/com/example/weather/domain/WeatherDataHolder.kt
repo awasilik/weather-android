@@ -3,7 +3,7 @@ package com.example.weather.domain
 import androidx.lifecycle.MutableLiveData
 import com.example.weather.domain.dataProcessors.WeatherDataProcessor
 import com.example.weather.domain.model.*
-import com.example.weather.api.WeatherRepository
+import com.example.weather.repository.api.WeatherRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -15,6 +15,8 @@ class WeatherDataHolder @Inject constructor(
     private val dataProcessor: WeatherDataProcessor) {
 
     private val successStatusRange = 200..300
+
+    // add sealed class defining current state of application
 
     val currentWeather = MutableLiveData<CurrentWeather>()
 
@@ -39,8 +41,8 @@ class WeatherDataHolder @Inject constructor(
         val apiResponse = weatherRepository.getData(location)
 
         if (successStatusRange.contains(apiResponse.statusCode))
-            ResultWrapper.Success(dataProcessor.process(apiResponse.data))
+            Result.Success(dataProcessor.process(apiResponse.data))
         else
-            ResultWrapper.Failure(Throwable(apiResponse.statusMessage))
+            Result.Failure(Throwable(apiResponse.statusMessage))
     }
 }

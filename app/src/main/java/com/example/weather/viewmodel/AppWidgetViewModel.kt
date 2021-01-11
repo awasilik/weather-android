@@ -1,7 +1,7 @@
 package com.example.weather.viewmodel
 
 import com.example.weather.domain.dataProcessors.CurrentWeatherDataProcessor
-import com.example.weather.api.WeatherRepository
+import com.example.weather.repository.api.WeatherRepository
 import com.example.weather.util.LocationStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

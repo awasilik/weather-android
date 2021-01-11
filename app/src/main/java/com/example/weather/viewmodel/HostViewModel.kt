@@ -13,6 +13,8 @@ class HostViewModel @ViewModelInject constructor(
     private val dataHolder: WeatherDataHolder,
     private val locationStorage: LocationStorage): ViewModel() {
 
+    val retrievingData = MutableLiveData<Boolean>()
+    val errorMessage = MutableLiveData<String?>()
     val locationList = Location.values()
 
     var currentLocation  = locationStorage.retrieve()
@@ -22,10 +24,6 @@ class HostViewModel @ViewModelInject constructor(
             refreshData()
         }
 
-    val retrievingData = MutableLiveData<Boolean>()
-
-    val errorMessage = MutableLiveData<String?>()
-
     fun refreshData() {
         viewModelScope.launch {
             retrievingData.value = true
@@ -34,4 +32,10 @@ class HostViewModel @ViewModelInject constructor(
             retrievingData.value = false
         }
     }
+}
+
+sealed class HostViewState{
+    class Error(error: Throwable) : HostViewState()
+    class Loading : HostViewState()
+    class Content() : HostViewState()
 }

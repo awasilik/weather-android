@@ -1,6 +1,7 @@
 package com.example.weather.util
 
 import com.example.weather.domain.model.Location
+import com.example.weather.repository.preferences.Preferences
 import javax.inject.Inject
 
 class LocationStorageImpl @Inject constructor(

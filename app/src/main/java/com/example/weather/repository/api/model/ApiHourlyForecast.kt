@@ -1,16 +1,10 @@
-package com.example.weather.api.model
+package com.example.weather.repository.api.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ApiCurrentWeather(
+data class ApiHourlyForecast (
     @field:SerializedName("dt")
     val time: Long? = null,
-
-    @field:SerializedName("sunrise")
-    val sunrise: Long? = null,
-
-    @field:SerializedName("sunset")
-    val sunset: Long? = null,
 
     @field:SerializedName("temp")
     val temperature: Double? = null,
@@ -31,5 +25,8 @@ data class ApiCurrentWeather(
     val windSpeed: Double? = null,
 
     @field:SerializedName("weather")
-    val description: List<Description>? = null
+    val description: List<Description>? = null,
+
+    @field:SerializedName("pop")
+    val rainChance: Double? = null
 )
