@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.weather.viewmodel.ForecastViewModel" />
+            type="com.elke.weather.viewmodel.ForecastViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView

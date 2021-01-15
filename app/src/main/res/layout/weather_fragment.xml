@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.weather.viewmodel.WeatherViewModel" />
+            type="com.elke.weather.viewmodel.WeatherViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
