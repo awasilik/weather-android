@@ -1,2 +1,4 @@
+include ':weather'
+include ':weather-lib'
 include ':app'
 rootProject.name='weather'

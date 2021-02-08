@@ -1,0 +1,32 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
+    <style name="label_text">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:layout_marginHorizontal">4dp</item>
+    </style>
+
+    <style name="small_label_text" parent="label_text">
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="location_item">
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/accented_text_color</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="location_dropdown">
+        <item name="android:paddingHorizontal">8dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@drawable/color_dropdown_text</item>
+        <item name="android:background">#484848</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+</resources>

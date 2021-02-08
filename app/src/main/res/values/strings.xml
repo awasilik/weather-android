@@ -1,27 +1,3 @@
 <resources>
     <string name="app_name">weather</string>
-
-    <string name="windSpeed">%1$.1f m/s</string>
-    <string name="pressure">%1$d hPa</string>
-    <string name="humidity">%1$d %%</string>
-
-    <string name="temperature_unit">°C</string>
-
-    <string name="fragment_forecast">Prognoza</string>
-    <string name="fragment_weather">Pogoda</string>
-
-    <string name="day_temperature_label">Dzień</string>
-    <string name="night_temperature_label">Noc</string>
-
-    <string name="hourly_forecast_label">Prognoza godzinowa:</string>
-
-    <string name="city_warsaw">Warszawa</string>
-    <string name="city_cracow">Kraków</string>
-    <string name="city_tarnobrzeg">Tarnobrzeg</string>
-    <string name="city_london">Londyn</string>
-    <string name="city_berlin">Berlin</string>
-    <string name="city_madrid">Madryt</string>
-    <string name="city_paris">Paryż</string>
-    <string name="city_prague">Praga</string>
-    <string name="city_moers">Moers</string>
 </resources>
